@@ -1,0 +1,3 @@
+[submodule "cli-typescript"]
+	path = cli-typescript
+	url = ./cli-typescript
