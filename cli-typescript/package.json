@@ -1,6 +1,7 @@
 {
   "name": "cli-typescript",
   "version": "1.0.0",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
+  "devDependencies": {
     "@types/command-line-args": "^5.2.3",
     "@types/node": "^22.5.5",
-    "command-line-args": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "command-line-args": "^6.0.0"
   }
 }

@@ -1,4 +1,4 @@
-import cli from "command-line-args";
+const cli = require("command-line-args");
 
 export type Opts = {
   args?: string[];
@@ -6,22 +6,24 @@ export type Opts = {
   config?: string;
 };
 
-export default function getOpts(): Opts {
+function getOpts(): Opts {
   return cli([
     {
       name: "args",
-      defaultValue: true,
+      defaultOption: true,
       type: String,
     },
     {
       name: "config",
-      alias: "c",
+      alias: "p",
       type: String,
     },
     {
       name: "pwd",
-      alias: "p",
+      alias: "c",
       type: String,
     },
   ]) as Opts;
 }
+
+module.exports = getOpts;
