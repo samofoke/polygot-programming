@@ -7,10 +7,11 @@ export type Opts = {
 };
 
 export default function getOpts(): Opts {
-  return cli([
+  const options = cli([
     {
       name: "args",
       defaultOption: true,
+      multiple: true,
       type: String,
     },
     {
@@ -23,5 +24,6 @@ export default function getOpts(): Opts {
       alias: "c",
       type: String,
     },
-  ]) as Opts;
+  ]);
+  return options as Opts;
 }
