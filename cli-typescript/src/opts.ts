@@ -10,17 +10,17 @@ export default function getOpts(): Opts {
   return cli([
     {
       name: "args",
-      defaultValue: true,
-      type: String,
-    },
-    {
-      name: "config",
-      alias: "c",
+      defaultOption: true,
       type: String,
     },
     {
       name: "pwd",
       alias: "p",
+      type: String,
+    },
+    {
+      name: "config",
+      alias: "c",
       type: String,
     },
   ]) as Opts;
