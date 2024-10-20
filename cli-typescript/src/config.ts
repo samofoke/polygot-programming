@@ -37,12 +37,28 @@ const getConfig = (op: Opts): string => {
   return path.join(envLocation, "projector", "projector.json");
 };
 
-//const getOperation = (op: Opts): string => {};
+const getArgs = (op: Opts): string[] => {
+  if (!op.args || op.args.length === 0) {
+    return [];
+  }
+};
+
+const getOperation = (op: Opts): string => {
+  if (!op.args || op.args.length === 0) {
+    return Operation.Print;
+  }
+
+  if (op[0] === "add") {
+    return Operation.Add;
+  }
+  return Operation.Print;
+};
 
 export default function getConfigFile(opts: Opts): Config {
   return {
     pwd: getPwd(opts),
     config: getConfig(opts),
+    args: getArgs(opts),
     operation: getOperation(opts),
   };
 }
