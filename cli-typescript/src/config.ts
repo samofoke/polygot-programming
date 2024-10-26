@@ -41,6 +41,21 @@ const getArgs = (op: Opts): string[] => {
   if (!op.args || op.args.length === 0) {
     return [];
   }
+  const pullOperations = getOperation(op);
+
+  if (pullOperations === Operation.Print) {
+    if (op.args.length > 1) {
+      throw new Error(`expected 0 or 1 but got ${op.args.length}`);
+    }
+    return op.args;
+  }
+
+  if (pullOperations === Operation.Add) {
+    if (op.args.length !== 3) {
+      throw new Error(`expected 2 arguments but got ${op.args.length - 1}`);
+    }
+    return op.args.slice(1);
+  }
 };
 
 const getOperation = (op: Opts): string => {
