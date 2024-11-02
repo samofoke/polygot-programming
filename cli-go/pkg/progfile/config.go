@@ -53,9 +53,10 @@ func getArgs(opts Opts) ([]string, error) {
 	if len(opts.Args) == 0 {
 		return []string{}, nil
 	}
-	if opts.Args[0] == "add" {
+	operation := getOperations(opts)
+	if operation == Add {
 		if len(opts.Args) != 3 {
-			return nil, fmt.Errorf("requires 2 args, but recieved %v", len(opts.Args))
+			return nil, fmt.Errorf("requires 2 args, but recieved %v", len(opts.Args)-1)
 		}
 		return opts.Args[1:], nil
 	}
