@@ -1,6 +1,7 @@
 package progfile
 
 import (
+	"fmt"
 	"os"
 	"path"
 )
@@ -39,13 +40,52 @@ func getConfig(opts Opts) (string, error) {
 }
 
 func getOperations(opts Opts) Operation {
-
+	if len(opts.Args) == 0 {
+		return Print
+	}
+	if opts.Args[0] == "add" {
+		return Add
+	}
+	return Print
 }
 
 func getArgs(opts Opts) ([]string, error) {
-
+	if len(opts.Args) == 0 {
+		return []string{}, nil
+	}
+	if opts.Args[0] == "add" {
+		if len(opts.Args) != 3 {
+			return nil, fmt.Errorf("requires 2 args, but recieved %v", len(opts.Args))
+		}
+		return opts.Args[1:], nil
+	}
+	if len(opts.Args) > 1 {
+		return nil, fmt.Errorf("print requires 0 or 1 arguments %v", len(opts.Args))
+	}
+	return opts.Args, nil
 }
 
-func NewConfig() (*Config, error) {
+func NewConfig(opts Opts) (*Config, error) {
+	pwd, err := getPwd(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	custConfig, err := getConfig(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	custArg, err := getArgs(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Config{
+		Pwd:       pwd,
+		Config:    custConfig,
+		Args:      custArg,
+		Operation: getOperations(opts),
+	}, nil
 
 }
