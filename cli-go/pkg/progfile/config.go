@@ -20,7 +20,7 @@ type Config struct {
 	Config    string
 }
 
-func getPwd(opts Opts) (string, error) {
+func getPwd(opts *Opts) (string, error) {
 	if opts.Pwd != "" {
 		return opts.Pwd, nil
 	}
@@ -28,7 +28,7 @@ func getPwd(opts Opts) (string, error) {
 	return os.Getwd()
 }
 
-func getConfig(opts Opts) (string, error) {
+func getConfig(opts *Opts) (string, error) {
 	if opts.Config != "" {
 		return opts.Config, nil
 	}
@@ -39,7 +39,7 @@ func getConfig(opts Opts) (string, error) {
 	return path.Join(customConfig, "projector", "projector.json"), nil
 }
 
-func getOperations(opts Opts) Operation {
+func getOperations(opts *Opts) Operation {
 	if len(opts.Args) == 0 {
 		return Print
 	}
@@ -49,7 +49,7 @@ func getOperations(opts Opts) Operation {
 	return Print
 }
 
-func getArgs(opts Opts) ([]string, error) {
+func getArgs(opts *Opts) ([]string, error) {
 	if len(opts.Args) == 0 {
 		return []string{}, nil
 	}
@@ -66,7 +66,7 @@ func getArgs(opts Opts) ([]string, error) {
 	return opts.Args, nil
 }
 
-func NewConfig(opts Opts) (*Config, error) {
+func NewConfig(opts *Opts) (*Config, error) {
 	pwd, err := getPwd(opts)
 	if err != nil {
 		return nil, err
